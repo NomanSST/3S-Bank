@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3S-Bank</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css.map">
+</head>
+<body> 
+    <div id="login-area">
+        <h1 class="text-center text-primary font-weight-bolder">Welcome to 3S Bank</h1>
+        <div class="log-in">
+            <h4 class="font-weight-bolder">Log in</h3>
+                <input type="text" class="form-control" placeholder="Email" >
+                <br>
+                <input type="password" name="" class="form-control" placeholder="Password" >
+                <br>
+                <button id="logbtn" class="btn btn-success">Log in</button>
+        </div>
+    </div>
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$ <span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                    <h2>$ <span id="currentWithdraw">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$ <span id="bal-amount" >312</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="area">
+                    <div class="inner-DW">
+                        <h4>Deposit</h4>
+                        <input id="dep-amount" type="text" class="form-control" placeholder="$ you want to deposit" >
+                        <button id="dep-btn" class="btn btn-success">Deposit</btn-success>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="area">
+                    <div class="inner-DW">
+                        <h4>Withdraw</h4>
+                        <input id="withdraw-amount" type="text" class="form-control" placeholder="$ you want to withdraw" >
+                        <button id="withdraw-button" class="btn btn-success">Withdraw</button>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //log-in button event handler
+        const loginbtn = document.getElementById("logbtn");
+        loginbtn.addEventListener("click",function(){
+            const loginArea = document.getElementById("login-area");
+            loginArea.style.display = "none";
+            const transactionArea = document.getElementById("transaction-area");
+            transactionArea.style.display = "block";
+        })
+        //deposit button event handler
+        let depButton= document.getElementById("dep-btn");
+        depButton.addEventListener("click",function(){
+            let depositAmount =document.getElementById("dep-amount").value;
+            let depositNumber = parseFloat(depositAmount);
+            if(depositNumber>=0){
+            let currentDeposit=document.getElementById("currentDeposit").innerText;
+            let currentNumber=parseFloat(currentDeposit);
+            let totalDeposit = depositNumber + currentNumber;
+            document.getElementById("currentDeposit").innerText = totalDeposit;
+            //updating balance
+            let balAmount = document.getElementById("bal-amount").innerText;
+            let balNumber = parseFloat(balAmount);
+            let newBalance = balNumber + depositNumber;
+            document.getElementById("bal-amount").innerText=newBalance;
+            }
+            document.getElementById("dep-amount").value="";
+        })
+        //withdraw button event handler
+        let withdrawButton = document.getElementById("withdraw-button");
+        withdrawButton.addEventListener("click",function(){
+            let withdrawAmount = document.getElementById("withdraw-amount").value;
+            let withdrawNumber = parseFloat(withdrawAmount);
+            document.getElementById("currentWithdraw").innerText=withdrawNumber;
+            
+            //updating balance
+            let balAmount = document.getElementById("bal-amount").innerText;
+            let balNumber = parseFloat(balAmount);
+            if(withdrawNumber<=balNumber && withdrawNumber>=0){
+            let newBalance = balNumber - withdrawNumber;
+            document.getElementById("bal-amount").innerText=newBalance;
+            }
+            else if(withdrawNumber<0){
+                document.getElementById("currentWithdraw").style.fontSize="20px";
+                document.getElementById("currentWithdraw").innerText="Error";               
+            }
+            else{
+                document.getElementById("currentWithdraw").style.fontSize="15px";
+                document.getElementById("currentWithdraw").innerText="Not enough Balance";
+            }
+            document.getElementById("withdraw-amount").value=null;
+        })
+    </script>
+</body>
+</html>

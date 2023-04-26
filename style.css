@@ -1,0 +1,41 @@
+body{
+    padding: 10%;
+}
+.log-in h4{
+    text-align:center;
+}
+.log-in{
+   margin-top: 50px;
+   padding: 3%;
+   border-radius: 10px;
+   box-shadow: 5px 5px 10px gray;
+}
+#transaction-area{
+    display : none;
+}
+.status{
+    margin: 0 20px;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+}
+.deposit{
+    background-color:yellowgreen;
+}
+.withdraw{
+    background-color: red;
+}
+.balance{
+    background-color: orange;
+}
+.area{
+    box-shadow: 5px 5px 10px grey;
+    margin-top:50px;
+    border-radius:10px;
+}
+.inner-DW{
+    margin: 20px;
+    padding: 30px;
+}
+
+  
